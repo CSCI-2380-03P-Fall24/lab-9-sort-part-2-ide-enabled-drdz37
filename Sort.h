@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
-
 using namespace std;
-
 /*
 Implement Bubble Sort
 
@@ -21,20 +19,23 @@ Step 2: implement bubbleSort()
 
         You may shorten the range each time if you wish.
 */
-
+//DONE!
 void swapInt(int arr[], int i, int j) {
-
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
 }
-
+//DONE!
 void bubblePass(int arr[], int n) {
-
+    for(int i=0; i<n - 1; i++)
+        if(arr[i]>arr[i+1])
+            swapInt(arr, i, i + 1);
 }
-
+//DONE!
 void bubbleSort(int arr[], int n) {
-
+    for(int i = 0; i<n; i++)
+        bubblePass(arr, n - i);
 }
-
-
 /*
 Implement Insertion Sort
 
@@ -53,16 +54,21 @@ Step 2: implement insertionSort()
         Then repeatedly call insertionStep() on each next index
         until the full array is sorted.
 */
-
+//DONE!
 void insertionStep(string arr[], int currentIndex) {
-
+    string key = arr[currentIndex];
+    int j = currentIndex - 1;
+    while(j>=0 && arr[j] > key){
+        arr[j+1] = arr[j];
+        j--;
+    }arr[j+1] = key;
 }
-
+//DONE!
 void insertionSort(string arr[], int n) {
-
+    for(int i=1; i<n; i++){
+        insertionStep(arr, i);
+    }
 }
-
-
 // Implement a brand new sorting algorithm
 //    Don't use a reference for this!
 //    Be sure to do your best to implement the algorithm's logical steps
@@ -85,13 +91,25 @@ Step 3: Finally, use your two functions above to complete the following in newSo
 */
 
 void swap(double darray[], int index1, int index2) {
-
+    double temp = darray[index1];
+    darray[index1] = darray[index2];
+    darray[index2] = temp;
 }
 
 int minFind(double darray[], int n) {
-    return -1;
+    int min = 0;
+    for(int i=1; i<n; i++){
+        if(darray[i]<darray[min]){
+            min = i;
+        }
+    }
+    return min;
 }
 
 void newSort(double darray[], int n) {
-
+    for(int i=0; i<n-1; i++){
+        int min = minFind(&darray[i], n-i);
+        int val = min + i;
+        swap(darray, i, val);
+    }
 }
